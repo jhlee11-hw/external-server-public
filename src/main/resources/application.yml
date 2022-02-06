@@ -1,0 +1,54 @@
+spring:
+  datasource:
+    master:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3307/db_example
+      username: externaluser
+      password: Hlihli123!
+
+    slave:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3305/db_example
+      username: externaluser
+      password: Hlihli123!
+
+    hikari:
+      connection-timeout: 30000 # 커넥션 풀 대기시간
+      validation-timeout: 5000 # 커넥션 유효 검사 대기시간, connection-timeout보다 작아야함
+      minimum-idle: 20 # 풀에 유지할 유휴 커넥션의 최소 개수
+      max-lifetime: 1800000 # 커넥션의 최대 유지 시간, 밀리초 단위
+      maximum-pool-size: 20 # 유휴 상태와 사용중인 커넥션을 포함해서 풀이 허용하는 최대 커넥션 개수
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update #
+    properties:
+      hibernate:
+        format_sql: true
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+  cloud:
+    discovery:
+      enabled: false # discovery 서버 연결시 true처리
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    org:
+      springframework: INFO
+  logback:
+    rollingpolicy:
+      max-file-size: 100MB
+      max-history: 10
