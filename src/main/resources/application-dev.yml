@@ -1,13 +1,10 @@
-spring:
-  profiles: dev
-
 logging:
-  pattern:
-    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
-    rolling-file-name: "/logs/abc.%d{yyyy-MM-dd}.%i"
   file:
     name: /logs/external-server.log
-    max-history: 30
   level:
     org:
       springframework: INFO
+spring:
+  config:
+    activate:
+      on-profile:
