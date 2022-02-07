@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: external-service
+
   datasource:
     master:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -52,3 +55,10 @@ logging:
     rollingpolicy:
       max-file-size: 100MB
       max-history: 10
+
+eureka:
+  client:
+    fetch-registry: true # 레지스트리에 있는 정보를 가져올지에 대한 여부 (디폴트 true)
+    register-with-eureka: true # 레지스트리에 자신을 등록할지에 대한 여부 (디폴트 true)
+    registry-fetch-interval-seconds: 30 # 서비스 목록을 설정한 시간마다 캐싱 (디폴트 30)
+    disable-delta: true # 캐싱 시 변경된 부분만 업데이트할 지 여부 (디폴트 false)
