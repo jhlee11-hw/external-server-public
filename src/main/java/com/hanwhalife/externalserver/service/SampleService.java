@@ -20,8 +20,8 @@ public class SampleService {
     private final SampleCustomRepository sampleCustomRepository;
 
     @Transactional
-    public void createSample(Sample s) {
-        sampleRepository.save(s);
+    public Sample createSample(Sample s) {
+        return sampleRepository.save(s);
     }
 
     @Transactional(readOnly = true)

@@ -15,6 +15,10 @@ public class SampleDto {
     @Schema(description = "샘플이메일", example = "sample@sample.com")
     private String email;
 
+    public SampleDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
     public SampleDto setName(String name) {
         this.name = name;
         return this;
