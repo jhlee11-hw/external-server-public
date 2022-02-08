@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -18,10 +20,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class SampleControllerTest{
 
     @InjectMocks
@@ -37,14 +39,14 @@ public class SampleControllerTest{
         mockMvc = MockMvcBuilders.standaloneSetup(sampleController).build();
     }
 
-    @DisplayName("샘플 생성")
+    @DisplayName("샘플 생성 컨트롤러 테스트")
     @Test
-    void createSample() throws Exception {
+    void createSampleTest() throws Exception {
         //given
-        final Sample sample = new Sample();
+        Sample sample = new Sample();
+        sample.setId(1L);
         sample.setEmail("george@mail.com");
         sample.setName("george");
-        when(sampleService.createSample(sample)).thenReturn(sample);
         doReturn(sample).when(sampleService).createSample(sample);
 
         //when
@@ -54,8 +56,8 @@ public class SampleControllerTest{
                         .content(
                                 new Gson().toJson(
                                         new SampleDto()
-                                                .setEmail("george@mail.com")
-                                                .setName("george")
+                                                .setEmail(sample.getEmail())
+                                                .setName(sample.getName())
                                 )
                         )
         );
